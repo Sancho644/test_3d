@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragDropSystem: {fileID: 978738329640503946}
+  hexPrefab: {fileID: 2493128041744458322, guid: 2548e9888be55254cb963e091191e90f, type: 3}
 --- !u!114 &978738329640503946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragOffset: {x: 0, y: 0, z: 0}
-  Stack: {fileID: 2399328112436603862}
+  <Stack>k__BackingField: {fileID: 2399328112436603862}
 --- !u!65 &572252816303313634
 BoxCollider:
   m_ObjectHideFlags: 0
