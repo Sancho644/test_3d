@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
 using Animation;
 using Board;
 using UnityEngine;
@@ -37,9 +34,7 @@ namespace Merge
             {
                 foundAny = false;
 
-                List<HexCell> allCells = board.OccupiedCells().ToList();
-
-                foreach (var cell in allCells)
+                foreach (var cell in board.Cells)
                 {
                     if (cell == null || cell.IsEmpty)
                         continue;
@@ -49,17 +44,12 @@ namespace Merge
                     if (merge == null)
                         continue;
 
-                    foundAny = true;
-
-                    yield return PlayMerge(
-                        merge,
-                        animationSystem);
+                    yield return PlayMerge(merge, animationSystem);
 
                     ExecuteMerge(merge, board);
-
                     IncreaseSpeed();
 
-                    break; // важно: по одному merge за шаг
+                    break; 
                 }
             } while (foundAny);
 
@@ -73,21 +63,15 @@ namespace Merge
 
         private void ExecuteMerge(MergeResult merge, BoardController board)
         {
-            /*var target = merge.Group.OrderByDescending(x => x.CurrentStack.Data.Count).First();
-            var total = merge.TotalCount;
+            var filledHex = merge.Group.Find(x => x.CurrentStacks.Find(y => y.Data.Placed));
+            var placedStack = filledHex.CurrentStacks.Find(x => x.Data.Placed);
+            var mergeHex = merge.Group.Find(x => x.CurrentStacks.Find(y => !y.Data.Placed));
+            var mergeStack = mergeHex.CurrentStacks.Find(x => !x.Data.Placed);
 
-            target.CurrentStack.Data.Count = total;
-
-            foreach (var cell in merge.Group)
-            {
-                if (cell == target)
-                    continue;
-
-                cell.CurrentStack =
-                    null;
-
-                Destroy(cell.CurrentStack?.gameObject);
-            }*/
+            mergeHex.AddStacks(placedStack);
+            mergeStack.SpawnHex(placedStack.Data.Count);
+            placedStack.Clear();
+            placedStack.gameObject.SetActive(false);
         }
 
         private void IncreaseSpeed()

@@ -1,6 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using Board;
+using DG.Tweening;
 using Merge;
 using UnityEngine;
 
@@ -8,35 +7,25 @@ namespace Animation
 {
     public class AnimationSystem : MonoBehaviour
     {
-        public float BaseDuration = 0.5f;
+        [SerializeField] private float baseDuration = 0.5f;
 
         public IEnumerator PlayMerge(MergeResult result, float speedMultiplier)
         {
-            float duration = BaseDuration / speedMultiplier;
-
-            Vector3 center = CalculateCenter(result.Group);
-
-            foreach (var cell in result.Group)
+            var duration = baseDuration / speedMultiplier;
+            var filledHex = result.Group.Find(x => x.CurrentStacks.Find(y => y.Data.Placed));
+            var placedStack = filledHex.CurrentStacks.Find(x => x.Data.Placed);
+            var mergeHex = result.Group.Find(x => x.CurrentStacks.Find(y => !y.Data.Placed));
+            var center = mergeHex.CurrentStacks[^1].HexList[^1].gameObject.transform.position;
+            var hexHeight = mergeHex.CurrentStacks[^1].HexList[0].Height;
+            
+            center = new Vector3(center.x, center.y + hexHeight, center.z);
+            
+            foreach (var hex in placedStack.HexList)
             {
-                //cell.CurrentStack.transform.DOMove(center, duration);
+                hex.transform.DOMove(center, duration);
             }
 
             yield return new WaitForSeconds(duration);
-        }
-
-        private Vector3 CalculateCenter(List<HexCell> group)
-        {
-            if (group == null || group.Count == 0)
-                return Vector3.zero;
-
-            Vector3 center = Vector3.zero;
-
-            foreach (var cell in group)
-            {
-                center += cell.transform.position;
-            }
-
-            return center / group.Count;
         }
     }
 }

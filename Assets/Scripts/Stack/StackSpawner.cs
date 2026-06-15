@@ -30,7 +30,6 @@ namespace Stack
             foreach (var config in levelConfig.AvailableStacks)
             {
                 var spawnPosition = GetSpawnPosition();
-                var color = colorDatabase.GetColor(config.Color);
 
                 StackView stack = Instantiate(
                     stackPrefab,
@@ -42,21 +41,9 @@ namespace Stack
                 {
                     Color = config.Color,
                     Count = config.Count
-                }, gameController);
-
-                _hexSpawnPosition = spawnPosition;
-
-                for (int i = 0; i < config.Count; i++)
-                {
-                    HexView hexView = Instantiate(
-                        hexPrefab,
-                        _hexSpawnPosition,
-                        Quaternion.identity,
-                        stack.transform);
-
-                    hexView.SetColor(color);
-                    _hexSpawnPosition += new Vector3(0f, hexView.Height, 0f);
-                }
+                }, gameController, colorDatabase);
+                
+                stack.SpawnHex();
 
                 _activeStacks.Add(stack);
             }

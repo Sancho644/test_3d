@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Board
 {
@@ -8,7 +8,7 @@ namespace Board
         {
             var result = new List<HexCell>();
 
-            if (start.IsEmpty)
+            if (start.IsEmpty || start.CurrentStacks.Count == 0)
             {
                 return result;
             }
@@ -26,7 +26,7 @@ namespace Board
                 if (!visited.Add(cell))
                     continue;
 
-                if (cell.IsEmpty)
+                if (cell.IsEmpty || cell.CurrentStacks.Count == 0)
                     continue;
 
                 if (cell.CurrentStacks[^1].Data.Color != color)

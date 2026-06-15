@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using Animation;
 using Board;
 using Input;
@@ -21,7 +21,7 @@ namespace Core
         [Header("State")] 
         [SerializeField] private GameState state;
 
-        private int remainingStacks;
+        private int _remainingStacks;
 
         private void Start()
         {
@@ -32,7 +32,7 @@ namespace Core
         {
             state = GameState.WaitingInput;
 
-            remainingStacks = stackSpawner.SpawnInitialStacks();
+            _remainingStacks = stackSpawner.SpawnInitialStacks();
 
             chainSystem.ResetSpeed();
         }
@@ -51,8 +51,9 @@ namespace Core
             }
 
             board.PlaceStack(target, drag.Stack);
+            drag.Stack.SetPlaced(true);
 
-            remainingStacks--;
+            _remainingStacks--;
 
             StartCoroutine(ResolveBoard());
             
@@ -71,15 +72,48 @@ namespace Core
                 yield break;
             }
 
+            /*if (CheckLose())
+            {
+                state = GameState.WaitingInput;
+                yield break;
+            }*/
+
             state = GameState.WaitingInput;
         }
 
         private bool CheckWin()
         {
             return
-                remainingStacks <= 0
+                _remainingStacks <= 0
                 &&
                 !chainSystem.IsResolving;
+        }
+
+        private bool CheckLose()
+        {
+            /*if (remainingStacks > 0)
+                return false;
+
+            var occupiedCells = board.OccupiedCells().ToList();
+
+            if (occupiedCells.Count == 0)
+                return false;
+
+            foreach (var cell in occupiedCells)
+            {
+                if (cell.CurrentStacks.Count == 0)
+                    continue;
+
+                var group = board.GetNeighbors(cell)
+                    .Where(n => !n.IsEmpty && n.CurrentStacks.Count > 0)
+                    .Where(n => n.CurrentStacks[^1].Data.Color == cell.CurrentStacks[^1].Data.Color)
+                    .Any();
+
+                if (group)
+                    return false;
+            }*/
+
+            return false;
         }
 
         private void ShowPackshot()

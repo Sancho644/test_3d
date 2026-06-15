@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Config;
 using Core;
 using Stack;
@@ -15,6 +14,8 @@ namespace Board
         [SerializeField] private GameController gameController;
 
         private Dictionary<int, HexCell> _cellMap;
+        
+        public List<HexCell> Cells { get { return cells; } }
         
         private void Awake()
         {
@@ -62,11 +63,6 @@ namespace Board
             }
 
             return bestCell;
-        }
-        
-        public IEnumerable<HexCell> OccupiedCells()
-        {
-            return cells.Where(c => !c.IsEmpty);
         }
         
         public void ClearCell(HexCell cell)

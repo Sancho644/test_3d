@@ -8,17 +8,16 @@ namespace Board
 {
     public class HexCell : MonoBehaviour
     {
-        public int Id;
         [SerializeField] private float cellHeight;
-        public List<HexCell> Neighbors;
-        public List<StackView> CurrentStacks = new();
+        [field:SerializeField] public int Id { get; private set; }
+        [field:SerializeField] public List<HexCell> Neighbors { get; private set; }
+        [field:SerializeField] public List<StackView> CurrentStacks { get; private set; } = new() ;
         
         [Header("Start Stack")] 
         [SerializeField] private bool spawnOnStart;
         [SerializeField] private ColorType colorType;
         [SerializeField] [Range(0, 9)] private int count = 1;
         [SerializeField] private StackView stackPrefab;
-        [SerializeField] private HexView hexPrefab;
         
         public bool IsEmpty => CurrentStacks.Count == 0;
         public float CellHeight => cellHeight;
@@ -42,10 +41,14 @@ namespace Board
             _gameController = gameController;
         }
 
+        public void AddStacks(StackView placedStack)
+        {
+            var closestStack = CurrentStacks[^1];
+            closestStack.Data.Count += placedStack.Data.Count;
+        }
+
         private void SpawnInitialStacks()
         {
-            var color = _colorDatabase.GetColor(colorType);
-            
             var stackPosition = new Vector3(
                 transform.position.x,  
                 transform.position.y + cellHeight, 
@@ -61,21 +64,10 @@ namespace Board
             {
                 Color = colorType,
                 Count = count
-            }, _gameController);
-
-            _hexSpawnPosition = stackPosition;
-
-            for (int i = 0; i < count; i++)
-            {
-                HexView hexView = Instantiate(
-                    hexPrefab,
-                    _hexSpawnPosition,
-                    Quaternion.identity,
-                    stack.transform);
-
-                hexView.SetColor(color);
-                _hexSpawnPosition += new Vector3(0f, hexView.Height, 0f);
-            }
+            }, _gameController, _colorDatabase);
+            
+            stack.SpawnHex();
+            stack.SetCanDrag(false);
 
             CurrentStacks.Add(stack);
         }
