@@ -64,6 +64,8 @@ namespace Core
             board.PlaceStack(target, drag.Stack);
             drag.Stack.SetPlaced(true);
 
+            state = GameState.Resolving;
+
             if (tutorialSystem != null)
                 tutorialSystem.OnStackPlaced();
 
@@ -74,8 +76,6 @@ namespace Core
 
         private IEnumerator ResolveBoard()
         {
-            state = GameState.Resolving;
-
             yield return chainSystem.Resolve(board, animationSystem);
 
             if (CheckWin())
