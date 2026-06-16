@@ -35,7 +35,7 @@ namespace Input
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (!_canDrag)
+            if (!_canDrag || !_gameController.CanAcceptInput)
             {
                 return;
             }

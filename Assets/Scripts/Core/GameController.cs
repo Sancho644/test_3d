@@ -24,6 +24,8 @@ namespace Core
 
         private int _remainingStacks;
 
+        public bool CanAcceptInput => state == GameState.WaitingInput;
+
         private void Start()
         {
             StartGame();
