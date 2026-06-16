@@ -24,19 +24,19 @@ namespace Stack
 
         public StackData TopSubStack => SubStacks.Count > 0 ? SubStacks[^1] : null;
 
-        public void Initialize(List<StackData> subStacks, GameController gameController, ColorDatabase colorDatabase)
+        public void Initialize(List<StackData> subStacks, GameController gameController, ColorDatabase colorDatabase, TutorialSystem tutorialSystem = null)
         {
             SubStacks = subStacks;
             foreach (var sub in subStacks)
                 sub.View = this;
 
             _colorDatabase = colorDatabase;
-            dragDropSystem.Initialize(gameController);
+            dragDropSystem.Initialize(gameController, tutorialSystem);
         }
 
-        public void Initialize(StackData data, GameController gameController, ColorDatabase colorDatabase)
+        public void Initialize(StackData data, GameController gameController, ColorDatabase colorDatabase, TutorialSystem tutorialSystem = null)
         {
-            Initialize(new List<StackData> { data }, gameController, colorDatabase);
+            Initialize(new List<StackData> { data }, gameController, colorDatabase, tutorialSystem);
         }
 
         public void PlaySpawn()

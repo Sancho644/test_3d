@@ -11,6 +11,7 @@ namespace Input
         [field:SerializeField] public StackView Stack { get; private set; }
         
         private GameController _gameController;
+        private TutorialSystem _tutorialSystem;
 
         private Vector3 _startPosition;
         private Vector3 _mouseOffset;
@@ -18,9 +19,10 @@ namespace Input
         private Camera _cam;
         private bool _canDrag = true;
 
-        public void Initialize(GameController gameController)
+        public void Initialize(GameController gameController, TutorialSystem tutorialSystem = null)
         {
             _gameController = gameController;
+            _tutorialSystem = tutorialSystem;
         }
 
         private void Start()
@@ -50,6 +52,9 @@ namespace Input
 
                 _mouseOffset = transform.position - hitPoint;
             }
+
+            if (_tutorialSystem != null)
+                _tutorialSystem.OnStackGrabbed();
         }
 
         public void OnDrag(PointerEventData eventData)

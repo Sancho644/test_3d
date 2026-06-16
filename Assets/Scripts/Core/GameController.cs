@@ -17,6 +17,7 @@ namespace Core
         [SerializeField] private AnimationSystem animationSystem;
         [SerializeField] private ChainReactionSystem chainSystem;
         [SerializeField] private PackshotUI packshotUI;
+        [SerializeField] private TutorialSystem tutorialSystem;
 
         [Header("State")] 
         [SerializeField] private GameState state;
@@ -35,6 +36,13 @@ namespace Core
             _remainingStacks = stackSpawner.SpawnInitialStacks();
 
             chainSystem.ResetSpeed();
+
+            if (tutorialSystem != null && !tutorialSystem.IsTutorialFinished)
+            {
+                var targetStack = stackSpawner.GetStackAt(1);
+                if (targetStack != null)
+                    tutorialSystem.StartTutorial(targetStack);
+            }
         }
 
         public bool TryPlace(DragDropSystem drag)
@@ -47,6 +55,10 @@ namespace Core
             if (target == null)
             {
                 drag.Return();
+
+                if (tutorialSystem != null)
+                    tutorialSystem.OnStackReturned();
+
                 return false;
             }
 
@@ -54,6 +66,9 @@ namespace Core
             drag.Stack.SetPlaced(true);
 
             _remainingStacks--;
+
+            if (tutorialSystem != null)
+                tutorialSystem.OnStackPlaced();
 
             StartCoroutine(ResolveBoard());
             

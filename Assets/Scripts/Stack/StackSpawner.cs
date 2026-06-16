@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Board;
 using Config;
@@ -20,6 +20,7 @@ namespace Stack
         [SerializeField] private GameController gameController;
         [SerializeField] private LevelConfig levelConfig;
         [SerializeField] private ColorDatabase colorDatabase;
+        [SerializeField] private TutorialSystem tutorialSystem;
 
         private readonly List<StackView> _activeStacks = new();
         private Vector3 _hexSpawnPosition;
@@ -42,7 +43,7 @@ namespace Stack
                     .Select(s => new StackData { Color = s.Color, Count = s.Count })
                     .ToList();
 
-                stack.Initialize(subStacks, gameController, colorDatabase);
+                stack.Initialize(subStacks, gameController, colorDatabase, tutorialSystem);
                 stack.SpawnHex();
 
                 _activeStacks.Add(stack);
@@ -59,6 +60,23 @@ namespace Stack
             var spawnPointPosition = spawnPoints[_activeStacks.Count % spawnPoints.Length].position;
 
             return spawnPointPosition;
+        }
+
+        public StackView GetFirstActiveStack()
+        {
+            foreach (var stack in _activeStacks)
+            {
+                if (stack != null)
+                    return stack;
+            }
+            return null;
+        }
+
+        public StackView GetStackAt(int index)
+        {
+            if (index < 0 || index >= _activeStacks.Count)
+                return null;
+            return _activeStacks[index];
         }
 
         public bool HasAvailableStacks()
