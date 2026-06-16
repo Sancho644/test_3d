@@ -16,4 +16,4 @@ MonoBehaviour:
   DestroyThreshold: 10
   BaseMoveSpeed: 1
   SpeedIncrease: 0.3
-  PerHexDestroyDuration: 0.1
+  PerHexDestroyDuration: 0.2

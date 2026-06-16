@@ -23,9 +23,24 @@ MonoBehaviour:
     Color: 3
     Count: 5
   AvailableStacks:
-  - Color: 0
-    Count: 1
-  - Color: 1
-    Count: 2
-  - Color: 3
-    Count: 3
+  - Segments:
+    - Color: 0
+      Count: 2
+    - Color: 3
+      Count: 6
+    - Color: 1
+      Count: 5
+  - Segments:
+    - Color: 0
+      Count: 5
+    - Color: 2
+      Count: 5
+    - Color: 4
+      Count: 5
+  - Segments:
+    - Color: 1
+      Count: 8
+    - Color: 0
+      Count: 4
+    - Color: 4
+      Count: 2
