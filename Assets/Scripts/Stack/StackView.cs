@@ -124,5 +124,15 @@ namespace Stack
             Data.Placed = false;
             Data.Count = 0;
         }
+
+        public void RemoveTopHexes(int count)
+        {
+            for (int i = 0; i < count && HexList.Count > 0; i++)
+            {
+                var hex = HexList[^1];
+                HexList.RemoveAt(HexList.Count - 1);
+                Destroy(hex.gameObject);
+            }
+        }
     }
 }

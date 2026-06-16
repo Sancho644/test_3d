@@ -1,4 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
+using System;
+using Config;
 using DG.Tweening;
 using Merge;
 using UnityEngine;
@@ -9,6 +11,7 @@ namespace Animation
     {
         [SerializeField] private float baseDuration = 0.5f;
         [SerializeField] private float peakHeight = 2f;
+        [SerializeField] private GameConfig gameConfig;
 
         public IEnumerator PlayMerge(MergeResult result, float speedMultiplier)
         {
@@ -27,12 +30,23 @@ namespace Animation
             if (targetView.HexList.Count == 0 || placedView.HexList.Count == 0)
                 yield break;
 
+            var total = targetStackData.Count + placedStackData.Count;
+            var toMerge = total > gameConfig.DestroyThreshold
+                ? gameConfig.DestroyThreshold - targetStackData.Count
+                : placedStackData.Count;
+
+            if (toMerge <= 0)
+                yield break;
+
             var hexHeight = targetView.HexList[0].Height;
             var baseTargetPos = targetView.HexList[^1].transform.position + Vector3.up * hexHeight;
 
-            for (int i = 0; i < placedView.HexList.Count; i++)
+            var mergeCount = Math.Min(toMerge, placedView.HexList.Count);
+            var startIndex = placedView.HexList.Count - 1;
+
+            for (int i = 0; i < mergeCount; i++)
             {
-                var hex = placedView.HexList[i];
+                var hex = placedView.HexList[startIndex - i];
                 if (hex == null)
                     continue;
 

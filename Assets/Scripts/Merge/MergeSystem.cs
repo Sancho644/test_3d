@@ -1,18 +1,17 @@
 using System.Linq;
 using Board;
-using Stack;
 
 namespace Merge
 {
     public class MergeSystem
     {
         private GroupFinder finder;
-        private int mergeThreshold;
+        private int destroyThreshold;
 
-        public MergeSystem(GroupFinder finder, int mergeThreshold = 10)
+        public MergeSystem(GroupFinder finder, int destroyThreshold = 10)
         {
             this.finder = finder;
-            this.mergeThreshold = mergeThreshold;
+            this.destroyThreshold = destroyThreshold;
         }
 
         public MergeResult Check(HexCell cell)
@@ -25,15 +24,6 @@ namespace Merge
             if (group.Count < 2)
                 return null;
 
-            var total = group.Sum(x => x.CurrentStacks
-                .Where(s => s.Color == cell.CurrentStacks[^1].Color)
-                .Sum(s => s.Count));
-            
-            if (total > mergeThreshold)
-            {
-                return null;
-            }
-
             var placedStackData = group
                 .SelectMany(x => x.CurrentStacks)
                 .FirstOrDefault(s => s.Placed);
@@ -42,10 +32,16 @@ namespace Merge
                 .SelectMany(x => x.CurrentStacks)
                 .FirstOrDefault(s => !s.Placed && s.Color == cell.CurrentStacks[^1].Color);
 
+            if (targetStackData == null || targetStackData.Count >= destroyThreshold)
+                return null;
+
+            if (placedStackData == null || placedStackData.Count <= 0)
+                return null;
+
             return new MergeResult
             {
                 Group = group,
-                TotalCount = total,
+                TotalCount = 0,
                 Color = cell.CurrentStacks[^1].Color,
                 PlacedStackData = placedStackData,
                 TargetStackData = targetStackData

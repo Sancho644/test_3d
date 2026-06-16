@@ -20,7 +20,7 @@ namespace Merge
         private void Awake()
         {
             var groupFinder = new GroupFinder();
-            _mergeSystem = new MergeSystem(groupFinder);
+            _mergeSystem = new MergeSystem(groupFinder, gameConfig.DestroyThreshold);
         }
         
         public void ResetSpeed()
@@ -52,7 +52,7 @@ namespace Merge
 
                     yield return PlayMerge(merge, animationSystem);
 
-                    ExecuteMerge(merge, board);
+                    ExecuteMerge(merge);
                     IncreaseSpeed();
 
                     break; 
@@ -92,7 +92,7 @@ namespace Merge
             yield return animationSystem.PlayMerge(merge, _speedMultiplier);
         }
 
-        private void ExecuteMerge(MergeResult merge, BoardController board)
+        private void ExecuteMerge(MergeResult merge)
         {
             var placedStackData = merge.PlacedStackData;
             var targetStackData = merge.TargetStackData;
@@ -100,24 +100,41 @@ namespace Merge
             if (placedStackData == null || targetStackData == null)
                 return;
 
-            targetStackData.Count += placedStackData.Count;
+            var threshold = gameConfig.DestroyThreshold;
+            var total = targetStackData.Count + placedStackData.Count;
+            var toMerge = total > threshold ? threshold - targetStackData.Count : placedStackData.Count;
+
+            if (toMerge <= 0)
+                return;
+
+            targetStackData.Count += toMerge;
 
             if (targetStackData.View != null)
             {
-                targetStackData.View.SpawnHex(placedStackData.Count);
+                targetStackData.View.SpawnHex(toMerge);
             }
 
-            placedStackData.Count = 0;
-            placedStackData.Placed = false;
+            placedStackData.Count -= toMerge;
 
             if (placedStackData.View != null)
             {
-                placedStackData.View.gameObject.SetActive(false);
+                placedStackData.View.RemoveTopHexes(toMerge);
             }
 
-            foreach (var cell in merge.Group)
+            if (placedStackData.Count <= 0)
             {
-                cell.CurrentStacks.Remove(placedStackData);
+                placedStackData.Count = 0;
+                placedStackData.Placed = false;
+
+                if (placedStackData.View != null)
+                {
+                    placedStackData.View.gameObject.SetActive(false);
+                }
+
+                foreach (var cell in merge.Group)
+                {
+                    cell.CurrentStacks.Remove(placedStackData);
+                }
             }
         }
 
