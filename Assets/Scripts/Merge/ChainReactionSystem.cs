@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Linq;
 using Animation;
 using Board;
-using Stack;
+using Config;
 using UnityEngine;
 
 namespace Merge
@@ -10,6 +10,8 @@ namespace Merge
     public class ChainReactionSystem : MonoBehaviour
     {
         public bool IsResolving { get; private set; }
+
+        [SerializeField] private GameConfig gameConfig;
 
         private MergeSystem _mergeSystem;
         
@@ -54,6 +56,31 @@ namespace Merge
                     IncreaseSpeed();
 
                     break; 
+                }
+
+                if (!foundAny)
+                {
+                    foreach (var cell in board.Cells)
+                    {
+                        if (cell == null || cell.IsEmpty)
+                            continue;
+
+                        var stackData = cell.CurrentStacks
+                            .FirstOrDefault(s => s.Count >= gameConfig.DestroyThreshold);
+
+                        if (stackData?.View == null)
+                            continue;
+
+                        foundAny = true;
+
+                        yield return stackData.View.PlayDestroyAnimation(gameConfig.PerHexDestroyDuration);
+
+                        stackData.Count = 0;
+                        stackData.Placed = false;
+                        cell.CurrentStacks.Remove(stackData);
+
+                        break;
+                    }
                 }
             } while (foundAny);
 

@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using Config;
 using Core;
+using DG.Tweening;
 using Input;
 using UnityEngine;
 
@@ -66,6 +68,20 @@ namespace Stack
             {
                 Destroy(gameObject);
             });*/
+        }
+
+        public IEnumerator PlayDestroyAnimation(float perHexDuration = 0.1f)
+        {
+            for (int i = HexList.Count - 1; i >= 0; i--)
+            {
+                if (HexList[i] != null)
+                {
+                    HexList[i].transform.DOScale(new Vector3(0f, 1f, 0f), perHexDuration).SetEase(Ease.InBack);
+                    yield return new WaitForSeconds(perHexDuration);
+                }
+            }
+
+            Destroy(gameObject);
         }
 
         public void SpawnHex(int hexCount = 0)
