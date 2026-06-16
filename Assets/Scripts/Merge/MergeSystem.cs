@@ -1,5 +1,6 @@
 using System.Linq;
 using Board;
+using Stack;
 
 namespace Merge
 {
@@ -25,19 +26,40 @@ namespace Merge
                 return null;
 
             var mergeColor = cell.CurrentStacks[^1].Color;
-
-            var placedStackData = group
+            var allSameColor = group
                 .SelectMany(x => x.CurrentStacks)
-                .FirstOrDefault(s => s.Placed && s.Color == mergeColor);
+                .Where(s => s.Color == mergeColor && s.Count > 0)
+                .ToList();
 
-            var targetStackData = group
-                .SelectMany(x => x.CurrentStacks)
-                .FirstOrDefault(s => !s.Placed && s.Color == mergeColor);
-
-            if (targetStackData == null || targetStackData.Count >= destroyThreshold)
+            if (allSameColor.Count < 2)
                 return null;
 
-            if (placedStackData == null || placedStackData.Count <= 0)
+            var placed = allSameColor.FirstOrDefault(s => s.Placed);
+            var nonPlaced = allSameColor.Where(s => !s.Placed).ToList();
+
+            StackData source;
+            StackData target;
+
+            if (placed != null && nonPlaced.Count > 0)
+            {
+                source = placed;
+                target = nonPlaced.First();
+            }
+            else if (nonPlaced.Count >= 2)
+            {
+                nonPlaced.Sort((a, b) => a.Count.CompareTo(b.Count));
+                source = nonPlaced[0];
+                target = nonPlaced[1];
+            }
+            else
+            {
+                return null;
+            }
+
+            if (target.Count >= destroyThreshold)
+                return null;
+
+            if (source.Count <= 0)
                 return null;
 
             return new MergeResult
@@ -45,8 +67,8 @@ namespace Merge
                 Group = group,
                 TotalCount = 0,
                 Color = mergeColor,
-                PlacedStackData = placedStackData,
-                TargetStackData = targetStackData
+                PlacedStackData = source,
+                TargetStackData = target
             };
         }
     }

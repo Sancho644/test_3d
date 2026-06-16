@@ -142,8 +142,13 @@ namespace Stack
             var color = _colorDatabase.GetColor(topSub.Color);
             var main = hexFx.main;
             main.startColor = color;
-            hexFx.transform.SetParent(null);
+
+            var fxObject = hexFx.gameObject;
+            fxObject.transform.SetParent(null);
             hexFx.Play();
+
+            var duration = hexFx.main.duration + hexFx.main.startLifetime.constantMax;
+            Destroy(fxObject, duration);
         }
     }
 }
