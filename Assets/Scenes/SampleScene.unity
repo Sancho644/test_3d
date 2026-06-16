@@ -380,15 +380,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 13
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1 &147017240
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,17 +433,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 0
   cellHeight: 0
-  Neighbors:
-  - {fileID: 537057674}
-  - {fileID: 871964233}
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 1
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 2399328112436603862, guid: ce2c8cb6b03afe44989cfdfd3ac6dff6, type: 3}
-  hexPrefab: {fileID: 2493128041744458322, guid: 2548e9888be55254cb963e091191e90f, type: 3}
+  stackSpawnSettings: []
 --- !u!1001 &181565831
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1070,15 +1064,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 11
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &406807002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1203,15 +1195,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 23
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &467501619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1703,19 +1693,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 4
   cellHeight: 0
-  Neighbors:
-  - {fileID: 147017242}
-  - {fileID: 871964233}
-  - {fileID: 2107657696}
-  - {fileID: 1288205503}
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &549738973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1972,15 +1956,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 8
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &686823885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2159,15 +2141,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 20
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2562,15 +2542,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 24
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1 &812079613
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,6 +2626,18 @@ PrefabInstance:
       propertyPath: Neighbors.Array.data[1]
       value: 
       objectReference: {fileID: 2042878540}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 2042878540}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 831920712}
     - target: {fileID: 8700649975192595716, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.991
@@ -2747,6 +2737,26 @@ PrefabInstance:
       objectReference: {fileID: 814420003}
     - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
       propertyPath: Neighbors.Array.data[3]
+      value: 
+      objectReference: {fileID: 2042878540}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 1781152319}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 891259875}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[2]
+      value: 
+      objectReference: {fileID: 814420003}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[3]
       value: 
       objectReference: {fileID: 2042878540}
     - target: {fileID: 8700649975192595716, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
@@ -2856,16 +2866,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 1
   cellHeight: 0
-  Neighbors:
-  - {fileID: 0}
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &891259873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2900,6 +2907,22 @@ PrefabInstance:
       objectReference: {fileID: 831920712}
     - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
       propertyPath: Neighbors.Array.data[2]
+      value: 
+      objectReference: {fileID: 2042878540}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 1781152319}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 831920712}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[2]
       value: 
       objectReference: {fileID: 2042878540}
     - target: {fileID: 8700649975192595716, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
@@ -3389,15 +3412,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 15
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1 &1158822015
 GameObject:
   m_ObjectHideFlags: 0
@@ -3444,15 +3465,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 3
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &1193682676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3606,7 +3625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182f4a16f28f4d6b84d5403594b0e106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseDuration: 0.5
+  baseDuration: 0.5
 --- !u!1 &1245337481
 GameObject:
   m_ObjectHideFlags: 0
@@ -3653,15 +3672,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 10
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &1252303780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3930,15 +3947,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 2
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1 &1310899639
 GameObject:
   m_ObjectHideFlags: 0
@@ -4072,15 +4087,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 14
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1 &1419984134
 GameObject:
   m_ObjectHideFlags: 0
@@ -4127,15 +4140,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 17
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &1477621682
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4548,15 +4559,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 21
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &1667211509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4681,15 +4690,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 18
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1 &1682053302
 GameObject:
   m_ObjectHideFlags: 0
@@ -4736,15 +4743,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 16
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &1697481587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5266,15 +5271,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 9
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &1781152317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5307,6 +5310,34 @@ PrefabInstance:
       propertyPath: Neighbors.Array.data[1]
       value: 
       objectReference: {fileID: 831920712}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: stackSpawnSettings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: stackSpawnSettings.Array.data[0].Count
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: stackSpawnSettings.Array.data[1].Count
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 891259875}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 831920712}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: stackSpawnSettings.Array.data[1].ColorType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8700649975192595716, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5414,15 +5445,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 6
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &1818601609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5613,15 +5642,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 22
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &1899656873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5956,15 +5983,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 7
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1 &2004117175
 GameObject:
   m_ObjectHideFlags: 0
@@ -6112,15 +6137,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 12
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &2033755134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6235,6 +6258,22 @@ PrefabInstance:
       propertyPath: Neighbors.Array.data[2]
       value: 
       objectReference: {fileID: 891259875}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 831920712}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 814420003}
+    - target: {fileID: 6102130135612202426, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
+      propertyPath: <Neighbors>k__BackingField.Array.data[2]
+      value: 
+      objectReference: {fileID: 891259875}
     - target: {fileID: 8700649975192595716, guid: eb16dee787c04c1419a3deb0d307bdf8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.967
@@ -6342,15 +6381,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 19
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1001 &2077485226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6463,15 +6500,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e768f706df48b98fd2d17fb8d258f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 5
   cellHeight: 0
-  Neighbors: []
-  CurrentStacks: []
+  <Id>k__BackingField: 0
+  <Neighbors>k__BackingField: []
+  <CurrentStacks>k__BackingField: []
   spawnOnStart: 0
-  colorType: 0
-  count: 1
   stackPrefab: {fileID: 0}
-  hexPrefab: {fileID: 0}
+  stackSpawnSettings: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
