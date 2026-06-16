@@ -55,7 +55,7 @@ namespace Merge
 
                     yield return PlayMerge(merge, animationSystem);
 
-                    ExecuteMerge(merge);
+                    ExecuteMerge(merge, board);
                     IncreaseSpeed();
 
                     break; 
@@ -110,7 +110,7 @@ namespace Merge
             yield return animationSystem.PlayMerge(merge, _speedMultiplier);
         }
 
-        private void ExecuteMerge(MergeResult merge)
+        private void ExecuteMerge(MergeResult merge, BoardController board)
         {
             var placedStackData = merge.PlacedStackData;
             var targetStackData = merge.TargetStackData;
@@ -129,7 +129,7 @@ namespace Merge
 
             if (targetStackData.View != null)
             {
-                targetStackData.View.SpawnHex(toMerge);
+                targetStackData.View.SpawnHex();
             }
 
             placedStackData.Count -= toMerge;
@@ -144,14 +144,28 @@ namespace Merge
                 placedStackData.Count = 0;
                 placedStackData.Placed = false;
 
-                if (placedStackData.View != null)
-                {
-                    placedStackData.View.gameObject.SetActive(false);
-                }
-
                 foreach (var cell in merge.Group)
                 {
                     cell.CurrentStacks.Remove(placedStackData);
+                }
+
+                var view = placedStackData.View;
+                if (view != null)
+                {
+                    var hasRemaining = false;
+                    foreach (var cell in board.Cells)
+                    {
+                        if (cell.CurrentStacks.Any(s => s.View == view && s.Count > 0))
+                        {
+                            hasRemaining = true;
+                            break;
+                        }
+                    }
+
+                    if (!hasRemaining)
+                    {
+                        view.gameObject.SetActive(false);
+                    }
                 }
             }
         }

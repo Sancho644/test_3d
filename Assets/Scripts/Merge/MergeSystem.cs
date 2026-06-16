@@ -24,13 +24,15 @@ namespace Merge
             if (group.Count < 2)
                 return null;
 
+            var mergeColor = cell.CurrentStacks[^1].Color;
+
             var placedStackData = group
                 .SelectMany(x => x.CurrentStacks)
-                .FirstOrDefault(s => s.Placed);
+                .FirstOrDefault(s => s.Placed && s.Color == mergeColor);
 
             var targetStackData = group
                 .SelectMany(x => x.CurrentStacks)
-                .FirstOrDefault(s => !s.Placed && s.Color == cell.CurrentStacks[^1].Color);
+                .FirstOrDefault(s => !s.Placed && s.Color == mergeColor);
 
             if (targetStackData == null || targetStackData.Count >= destroyThreshold)
                 return null;
@@ -42,7 +44,7 @@ namespace Merge
             {
                 Group = group,
                 TotalCount = 0,
-                Color = cell.CurrentStacks[^1].Color,
+                Color = mergeColor,
                 PlacedStackData = placedStackData,
                 TargetStackData = targetStackData
             };

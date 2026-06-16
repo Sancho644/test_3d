@@ -33,7 +33,8 @@ namespace Board
             if (cell == null || !cell.IsEmpty)
                 return false;
 
-            cell.CurrentStacks.Add(stack.Data);
+            foreach (var sub in stack.SubStacks)
+                cell.CurrentStacks.Add(sub);
 
             stack.transform.position = new Vector3(
                 cell.transform.position.x,  

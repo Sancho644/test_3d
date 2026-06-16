@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Board;
 using Config;
 using Core;
@@ -37,12 +38,11 @@ namespace Stack
                     Quaternion.identity,
                     transform);
 
-                stack.Initialize(new StackData
-                {
-                    Color = config.Color,
-                    Count = config.Count
-                }, gameController, colorDatabase);
-                
+                var subStacks = config.Segments
+                    .Select(s => new StackData { Color = s.Color, Count = s.Count })
+                    .ToList();
+
+                stack.Initialize(subStacks, gameController, colorDatabase);
                 stack.SpawnHex();
 
                 _activeStacks.Add(stack);
