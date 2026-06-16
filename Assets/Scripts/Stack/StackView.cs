@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Config;
 using Core;
 using DG.Tweening;
@@ -16,7 +14,8 @@ namespace Stack
         [SerializeField] private DragDropSystem dragDropSystem;
         [SerializeField] private HexView hexPrefab;
         [SerializeField] private ParticleSystem hexFx;
-
+        [SerializeField] private float staggerDelay = 0.05f;
+        
         public List<StackData> SubStacks { get; private set; } = new();
         public List<HexView> HexList { get; private set; } = new();
 
@@ -34,20 +33,6 @@ namespace Stack
             dragDropSystem.Initialize(gameController, tutorialSystem);
         }
 
-        public void Initialize(StackData data, GameController gameController, ColorDatabase colorDatabase, TutorialSystem tutorialSystem = null)
-        {
-            Initialize(new List<StackData> { data }, gameController, colorDatabase, tutorialSystem);
-        }
-
-        public void PlaySpawn()
-        {
-            transform.localScale = Vector3.zero;
-        }
-
-        public void PlayMergeImpact()
-        {
-        }
-
         public Tween CreateDestroySequence(float perHexDuration, Action onComplete = null)
         {
             var seq = DOTween.Sequence();
@@ -56,7 +41,8 @@ namespace Stack
             {
                 if (HexList[i] != null)
                 {
-                    seq.Append(
+                    var index = HexList.Count - 1 - i;
+                    seq.Insert(index * staggerDelay,
                         HexList[i].transform
                             .DOScale(new Vector3(0f, 1f, 0f), perHexDuration)
                             .SetEase(Ease.InBack));
@@ -112,15 +98,6 @@ namespace Stack
         public void SetCanDrag(bool value)
         {
             dragDropSystem.SetCanDrag(value);
-        }
-
-        public void Clear()
-        {
-            foreach (var sub in SubStacks)
-            {
-                sub.Placed = false;
-                sub.Count = 0;
-            }
         }
 
         public void RemoveTopHexes(int count)
