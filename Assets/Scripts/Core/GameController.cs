@@ -83,10 +83,7 @@ namespace Core
 
         private bool CheckWin()
         {
-            return
-                _remainingStacks <= 0
-                &&
-                !chainSystem.IsResolving;
+            return _remainingStacks <= 0 && !chainSystem.IsResolving;
         }
 
         private bool CheckLose()

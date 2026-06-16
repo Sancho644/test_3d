@@ -24,8 +24,10 @@ namespace Merge
             if (group.Count < 2)
                 return null;
 
-            var total = group.Sum(x => x.CurrentStacks.Count);
-
+            var total = group.Sum(x => x.CurrentStacks
+                .Where(s => s.Data.Color == cell.CurrentStacks[^1].Data.Color)
+                .Sum(s => s.Data.Count));
+            
             if (total > mergeThreshold)
             {
                 return null;

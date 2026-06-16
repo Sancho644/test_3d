@@ -43,6 +43,8 @@ namespace Merge
 
                     if (merge == null)
                         continue;
+                    
+                    foundAny = true;
 
                     yield return PlayMerge(merge, animationSystem);
 
@@ -64,6 +66,11 @@ namespace Merge
         private void ExecuteMerge(MergeResult merge, BoardController board)
         {
             var filledHex = merge.Group.Find(x => x.CurrentStacks.Find(y => y.Data.Placed));
+            if (filledHex == null)
+            {
+                return;
+            }
+            
             var placedStack = filledHex.CurrentStacks.Find(x => x.Data.Placed);
             var mergeHex = merge.Group.Find(x => x.CurrentStacks.Find(y => !y.Data.Placed));
             var mergeStack = mergeHex.CurrentStacks.Find(x => !x.Data.Placed);

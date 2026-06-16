@@ -11,7 +11,7 @@ namespace Board
         [SerializeField] private float cellHeight;
         [field:SerializeField] public int Id { get; private set; }
         [field:SerializeField] public List<HexCell> Neighbors { get; private set; }
-        [field:SerializeField] public List<StackView> CurrentStacks { get; private set; } = new() ;
+        [field:SerializeField] public List<StackView> CurrentStacks { get; private set; }
         
         [Header("Start Stack")] 
         [SerializeField] private bool spawnOnStart;

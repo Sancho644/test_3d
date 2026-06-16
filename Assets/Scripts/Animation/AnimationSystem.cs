@@ -13,6 +13,11 @@ namespace Animation
         {
             var duration = baseDuration / speedMultiplier;
             var filledHex = result.Group.Find(x => x.CurrentStacks.Find(y => y.Data.Placed));
+            if (filledHex == null)
+            {
+                yield break;
+            }
+            
             var placedStack = filledHex.CurrentStacks.Find(x => x.Data.Placed);
             var mergeHex = result.Group.Find(x => x.CurrentStacks.Find(y => !y.Data.Placed));
             var center = mergeHex.CurrentStacks[^1].HexList[^1].gameObject.transform.position;
