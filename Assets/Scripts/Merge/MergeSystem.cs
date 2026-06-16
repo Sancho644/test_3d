@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Board;
 using Stack;
@@ -15,7 +16,7 @@ namespace Merge
             this.destroyThreshold = destroyThreshold;
         }
 
-        public MergeResult Check(HexCell cell)
+        public MergeResult Check(HexCell cell, HashSet<HexCell> modifiedCells)
         {
             if (cell.IsEmpty || cell.CurrentStacks.Count == 0)
                 return null;
@@ -47,9 +48,22 @@ namespace Merge
             }
             else if (nonPlaced.Count >= 2)
             {
-                nonPlaced.Sort((a, b) => a.Count.CompareTo(b.Count));
-                source = nonPlaced[0];
-                target = nonPlaced[1];
+                var sourceCandidate = nonPlaced.FirstOrDefault(s =>
+                    modifiedCells.Contains(FindCell(s, group)));
+                var targetCandidate = nonPlaced.FirstOrDefault(s =>
+                    !modifiedCells.Contains(FindCell(s, group)));
+
+                if (sourceCandidate != null && targetCandidate != null)
+                {
+                    source = sourceCandidate;
+                    target = targetCandidate;
+                }
+                else
+                {
+                    nonPlaced.Sort((a, b) => a.Count.CompareTo(b.Count));
+                    source = nonPlaced[0];
+                    target = nonPlaced[1];
+                }
             }
             else
             {
@@ -70,6 +84,16 @@ namespace Merge
                 PlacedStackData = source,
                 TargetStackData = target
             };
+        }
+
+        private HexCell FindCell(StackData stackData, List<HexCell> group)
+        {
+            foreach (var cell in group)
+            {
+                if (cell.CurrentStacks.Contains(stackData))
+                    return cell;
+            }
+            return null;
         }
     }
 }

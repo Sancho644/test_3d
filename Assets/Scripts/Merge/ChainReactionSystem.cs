@@ -19,6 +19,7 @@ namespace Merge
         private MergeSystem _mergeSystem;
         
         private float _speedMultiplier = 1f;
+        private HashSet<HexCell> _modifiedCells = new();
 
         private void Awake()
         {
@@ -29,6 +30,7 @@ namespace Merge
         public void ResetSpeed()
         {
             _speedMultiplier = 1f;
+            _modifiedCells.Clear();
         }
 
         public IEnumerator Resolve(BoardController board, AnimationSystem animationSystem)
@@ -46,7 +48,7 @@ namespace Merge
                     if (cell == null || cell.IsEmpty)
                         continue;
 
-                    MergeResult merge = _mergeSystem.Check(cell);
+                    MergeResult merge = _mergeSystem.Check(cell, _modifiedCells);
 
                     if (merge == null)
                         continue;
@@ -97,6 +99,7 @@ namespace Merge
                             item.data.Count = 0;
                             item.data.Placed = false;
                             item.cell.CurrentStacks.Remove(item.data);
+                            _modifiedCells.Add(item.cell);
                         }
                     }
                 }
@@ -129,7 +132,7 @@ namespace Merge
 
             if (targetStackData.View != null)
             {
-                targetStackData.View.SpawnHex();
+                targetStackData.View.SpawnHex(toMerge);
             }
 
             placedStackData.Count -= toMerge;
@@ -137,6 +140,11 @@ namespace Merge
             if (placedStackData.View != null)
             {
                 placedStackData.View.RemoveTopHexes(toMerge);
+            }
+
+            foreach (var cell in merge.Group)
+            {
+                _modifiedCells.Add(cell);
             }
 
             if (placedStackData.Count <= 0)

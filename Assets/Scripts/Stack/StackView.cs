@@ -73,7 +73,7 @@ namespace Stack
             return seq;
         }
 
-        public void SpawnHex()
+        public void SpawnHex(int countToAdd = -1)
         {
             var hexPosition = transform.position;
 
@@ -86,8 +86,9 @@ namespace Stack
             foreach (var sub in SubStacks)
             {
                 var color = _colorDatabase.GetColor(sub.Color);
+                var count = countToAdd >= 0 ? countToAdd : sub.Count;
 
-                for (int i = 0; i < sub.Count; i++)
+                for (int i = 0; i < count; i++)
                 {
                     HexView hexView = Instantiate(
                         hexPrefab,
