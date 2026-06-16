@@ -88,6 +88,7 @@ namespace Core
             if (_targetStack == null || hand == null || canvas == null)
                 return;
 
+            
             hand.gameObject.SetActive(true);
 
             var stackScreenPos = WorldToCanvasPosition(_targetStack.transform.position);

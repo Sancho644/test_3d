@@ -100,7 +100,16 @@ namespace Core
 
         private bool CheckWin()
         {
-            return _remainingStacks <= 0 && !chainSystem.IsResolving;
+            if (chainSystem.IsResolving)
+                return false;
+
+            foreach (var cell in board.Cells)
+            {
+                if (cell != null && !cell.IsEmpty)
+                    return false;
+            }
+
+            return true;
         }
 
         private bool CheckLose()

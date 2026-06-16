@@ -7,5 +7,6 @@ namespace Config
     {
         public int DestroyThreshold = 10;
         public float PerHexDestroyDuration = 0.1f;
+        public float SpeedMultiplier = 1.3f;
     }
 }

@@ -17,16 +17,16 @@ namespace Merge
         [SerializeField] private GameConfig gameConfig;
 
         private MergeSystem _mergeSystem;
-        
+
         private float _speedMultiplier = 1f;
-        private HashSet<HexCell> _modifiedCells = new();
+        private readonly HashSet<HexCell> _modifiedCells = new();
 
         private void Awake()
         {
             var groupFinder = new GroupFinder();
             _mergeSystem = new MergeSystem(groupFinder, gameConfig.DestroyThreshold);
         }
-        
+
         public void ResetSpeed()
         {
             _speedMultiplier = 1f;
@@ -52,7 +52,7 @@ namespace Merge
 
                     if (merge == null)
                         continue;
-                    
+
                     foundAny = true;
 
                     yield return PlayMerge(merge, animationSystem);
@@ -60,7 +60,7 @@ namespace Merge
                     ExecuteMerge(merge, board);
                     IncreaseSpeed();
 
-                    break; 
+                    break;
                 }
 
                 if (!foundAny)
@@ -87,8 +87,8 @@ namespace Merge
 
                         foreach (var item in toDestroy)
                         {
-                            var destroySeq = item.data.View.CreateDestroySequence(
-                                gameConfig.PerHexDestroyDuration);
+                            var destroyDuration = gameConfig.PerHexDestroyDuration / _speedMultiplier;
+                            var destroySeq = item.data.View.CreateDestroySequence(destroyDuration);
                             masterSeq.Join(destroySeq);
                         }
 
@@ -180,7 +180,7 @@ namespace Merge
 
         private void IncreaseSpeed()
         {
-            _speedMultiplier *= 1.3f;
+            _speedMultiplier *= gameConfig.SpeedMultiplier;
         }
     }
 }
