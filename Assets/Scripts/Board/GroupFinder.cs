@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Stack;
 
 namespace Board
 {
@@ -13,7 +14,7 @@ namespace Board
                 return result;
             }
 
-            var color = start.CurrentStacks[^1].Data.Color;
+            var color = start.CurrentStacks[^1].Color;
             var visited = new HashSet<HexCell>();
             var queue = new Queue<HexCell>();
 
@@ -29,10 +30,10 @@ namespace Board
                 if (cell.IsEmpty || cell.CurrentStacks.Count == 0)
                     continue;
 
-                if (cell.CurrentStacks[^1].Data.Color != color)
+                if (cell.CurrentStacks[^1].Color != color)
                     continue;
                 
-                if (cell.CurrentStacks[^1].Data.Count == 0)
+                if (cell.CurrentStacks[^1].Count == 0)
                     continue;
 
                 result.Add(cell);

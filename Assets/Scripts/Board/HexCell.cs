@@ -11,7 +11,7 @@ namespace Board
         [SerializeField] private float cellHeight;
         [field:SerializeField] public int Id { get; private set; }
         [field:SerializeField] public List<HexCell> Neighbors { get; private set; }
-        [field:SerializeField] public List<StackView> CurrentStacks { get; private set; }
+        [field:SerializeField] public List<StackData> CurrentStacks { get; private set; } = new();
         
         [Header("Start Stack")] 
         [SerializeField] private bool spawnOnStart;
@@ -40,12 +40,6 @@ namespace Board
             _gameController = gameController;
         }
 
-        public void AddStacks(StackView placedStack)
-        {
-            var closestStack = CurrentStacks[^1];
-            closestStack.Data.Count += placedStack.Data.Count;
-        }
-
         private void SpawnInitialStacks()
         {
             var stackPosition = new Vector3(
@@ -57,26 +51,32 @@ namespace Board
             {
                 if (CurrentStacks.Count != 0)
                 {
-                    var lastHexPosition = CurrentStacks[^1].HexList[^1].gameObject.transform.position;
-                    stackPosition = new Vector3(lastHexPosition.x, lastHexPosition.y + CurrentStacks[^1].HexList[^1].Height, lastHexPosition.z);
+                    var lastStack = CurrentStacks[^1];
+                    var lastView = lastStack.View;
+                    if (lastView != null && lastView.HexList.Count > 0)
+                    {
+                        var lastHexPosition = lastView.HexList[^1].gameObject.transform.position;
+                        stackPosition = new Vector3(lastHexPosition.x, lastHexPosition.y + lastView.HexList[^1].Height, lastHexPosition.z);
+                    }
                 }
                 
+                var data = new StackData
+                {
+                    Color = spawnSetting.ColorType,
+                    Count = spawnSetting.Count
+                };
+
                 StackView stack = Instantiate(
                     stackPrefab,
                     stackPosition,
                     Quaternion.identity,
                     transform);
 
-                stack.Initialize(new StackData
-                {
-                    Color = spawnSetting.ColorType,
-                    Count = spawnSetting.Count
-                }, _gameController, _colorDatabase);
-            
+                stack.Initialize(data, _gameController, _colorDatabase);
                 stack.SpawnHex();
                 stack.SetCanDrag(false);
 
-                CurrentStacks.Add(stack);
+                CurrentStacks.Add(data);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Config;
 using Core;
 using Stack;
@@ -33,7 +33,7 @@ namespace Board
             if (cell == null || !cell.IsEmpty)
                 return false;
 
-            cell.CurrentStacks.Add(stack);
+            cell.CurrentStacks.Add(stack.Data);
 
             stack.transform.position = new Vector3(
                 cell.transform.position.x,  

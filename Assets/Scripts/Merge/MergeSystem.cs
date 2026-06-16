@@ -1,5 +1,6 @@
 using System.Linq;
 using Board;
+using Stack;
 
 namespace Merge
 {
@@ -25,19 +26,29 @@ namespace Merge
                 return null;
 
             var total = group.Sum(x => x.CurrentStacks
-                .Where(s => s.Data.Color == cell.CurrentStacks[^1].Data.Color)
-                .Sum(s => s.Data.Count));
+                .Where(s => s.Color == cell.CurrentStacks[^1].Color)
+                .Sum(s => s.Count));
             
             if (total > mergeThreshold)
             {
                 return null;
             }
 
+            var placedStackData = group
+                .SelectMany(x => x.CurrentStacks)
+                .FirstOrDefault(s => s.Placed);
+
+            var targetStackData = group
+                .SelectMany(x => x.CurrentStacks)
+                .FirstOrDefault(s => !s.Placed && s.Color == cell.CurrentStacks[^1].Color);
+
             return new MergeResult
             {
                 Group = group,
                 TotalCount = total,
-                Color = cell.CurrentStacks[^1].Data.Color
+                Color = cell.CurrentStacks[^1].Color,
+                PlacedStackData = placedStackData,
+                TargetStackData = targetStackData
             };
         }
     }

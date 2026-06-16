@@ -1,6 +1,8 @@
 ﻿using System.Collections;
+using System.Linq;
 using Animation;
 using Board;
+using Stack;
 using UnityEngine;
 
 namespace Merge
@@ -65,20 +67,31 @@ namespace Merge
 
         private void ExecuteMerge(MergeResult merge, BoardController board)
         {
-            var filledHex = merge.Group.Find(x => x.CurrentStacks.Find(y => y.Data.Placed));
-            if (filledHex == null)
-            {
-                return;
-            }
-            
-            var placedStack = filledHex.CurrentStacks.Find(x => x.Data.Placed);
-            var mergeHex = merge.Group.Find(x => x.CurrentStacks.Find(y => !y.Data.Placed));
-            var mergeStack = mergeHex.CurrentStacks.Find(x => !x.Data.Placed);
+            var placedStackData = merge.PlacedStackData;
+            var targetStackData = merge.TargetStackData;
 
-            mergeHex.AddStacks(placedStack);
-            mergeStack.SpawnHex(placedStack.Data.Count);
-            placedStack.Clear();
-            placedStack.gameObject.SetActive(false);
+            if (placedStackData == null || targetStackData == null)
+                return;
+
+            targetStackData.Count += placedStackData.Count;
+
+            if (targetStackData.View != null)
+            {
+                targetStackData.View.SpawnHex(placedStackData.Count);
+            }
+
+            placedStackData.Count = 0;
+            placedStackData.Placed = false;
+
+            if (placedStackData.View != null)
+            {
+                placedStackData.View.gameObject.SetActive(false);
+            }
+
+            foreach (var cell in merge.Group)
+            {
+                cell.CurrentStacks.Remove(placedStackData);
+            }
         }
 
         private void IncreaseSpeed()

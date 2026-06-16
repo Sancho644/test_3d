@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Config;
 using Core;
 using Input;
@@ -20,6 +20,7 @@ namespace Stack
         public void Initialize(StackData data, GameController gameController, ColorDatabase colorDatabase)
         {
             Data = data;
+            data.View = this;
             _colorDatabase = colorDatabase;
 
             dragDropSystem.Initialize(gameController);
