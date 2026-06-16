@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Config
@@ -11,8 +11,9 @@ namespace Config
         public Color GetColor(ColorType type)
         {
             var colorEntity = colors.Find(x => x.type == type);
-            
-            return colorEntity?.color ?? new Color(); 
+            var color = colorEntity?.color ?? Color.white;
+            color.a = 1f;
+            return color;
         }
     }
 }

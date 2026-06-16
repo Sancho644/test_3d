@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Config;
@@ -13,6 +14,7 @@ namespace Stack
         [Header("Visual")] 
         [SerializeField] private DragDropSystem dragDropSystem;
         [SerializeField] private HexView hexPrefab;
+        [SerializeField] private ParticleSystem hexFx;
 
         public StackData Data { get; private set; }
         public List<HexView> HexList { get; private set; } = new();
@@ -84,6 +86,31 @@ namespace Stack
             Destroy(gameObject);
         }
 
+        public Tween CreateDestroySequence(float perHexDuration, Action onComplete = null)
+        {
+            var seq = DOTween.Sequence();
+
+            for (int i = HexList.Count - 1; i >= 0; i--)
+            {
+                if (HexList[i] != null)
+                {
+                    seq.Append(
+                        HexList[i].transform
+                            .DOScale(new Vector3(0f, 1f, 0f), perHexDuration)
+                            .SetEase(Ease.InBack));
+                }
+            }
+
+            seq.OnComplete(() =>
+            {
+                PlayDestroyEffect();
+                onComplete?.Invoke();
+                Destroy(gameObject);
+            });
+
+            return seq;
+        }
+
         public void SpawnHex(int hexCount = 0)
         {
             var count = hexCount != 0 ? hexCount : Data.Count;
@@ -133,6 +160,17 @@ namespace Stack
                 HexList.RemoveAt(HexList.Count - 1);
                 Destroy(hex.gameObject);
             }
+        }
+
+        public void PlayDestroyEffect()
+        {
+            if (hexFx == null) return;
+
+            var color = _colorDatabase.GetColor(Data.Color);
+            var main = hexFx.main;
+            main.startColor = color;
+            hexFx.transform.SetParent(null);
+            hexFx.Play();
         }
     }
 }

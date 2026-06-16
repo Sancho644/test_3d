@@ -1,8 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Animation;
 using Board;
 using Config;
+using DG.Tweening;
+using Stack;
 using UnityEngine;
 
 namespace Merge
@@ -60,6 +63,8 @@ namespace Merge
 
                 if (!foundAny)
                 {
+                    var toDestroy = new List<(StackData data, HexCell cell)>();
+
                     foreach (var cell in board.Cells)
                     {
                         if (cell == null || cell.IsEmpty)
@@ -68,18 +73,31 @@ namespace Merge
                         var stackData = cell.CurrentStacks
                             .FirstOrDefault(s => s.Count >= gameConfig.DestroyThreshold);
 
-                        if (stackData?.View == null)
-                            continue;
+                        if (stackData?.View != null)
+                            toDestroy.Add((stackData, cell));
+                    }
 
+                    if (toDestroy.Count > 0)
+                    {
                         foundAny = true;
 
-                        yield return stackData.View.PlayDestroyAnimation(gameConfig.PerHexDestroyDuration);
+                        var masterSeq = DOTween.Sequence();
 
-                        stackData.Count = 0;
-                        stackData.Placed = false;
-                        cell.CurrentStacks.Remove(stackData);
+                        foreach (var item in toDestroy)
+                        {
+                            var destroySeq = item.data.View.CreateDestroySequence(
+                                gameConfig.PerHexDestroyDuration);
+                            masterSeq.Join(destroySeq);
+                        }
 
-                        break;
+                        yield return masterSeq.WaitForCompletion();
+
+                        foreach (var item in toDestroy)
+                        {
+                            item.data.Count = 0;
+                            item.data.Placed = false;
+                            item.cell.CurrentStacks.Remove(item.data);
+                        }
                     }
                 }
             } while (foundAny);
