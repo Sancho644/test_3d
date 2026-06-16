@@ -1,7 +1,6 @@
-﻿using Config;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Board
+namespace Config
 {
     [CreateAssetMenu(menuName = "Configs/LevelConfig")]
     public class LevelConfig : ScriptableObject

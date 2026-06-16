@@ -1,7 +1,6 @@
 ﻿using System;
-using Config;
 
-namespace Board
+namespace Config
 {
     [Serializable]
     public class StackConfig
