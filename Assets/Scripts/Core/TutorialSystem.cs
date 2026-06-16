@@ -12,6 +12,7 @@ namespace Core
         [SerializeField] private Canvas canvas;
         [SerializeField] private float handBobAmount = 30f;
         [SerializeField] private float handBobDuration = 0.5f;
+        [SerializeField] private GameController gameController;
 
         [Header("Timing")]
         [SerializeField] private float showDelay = 2f;
@@ -49,6 +50,8 @@ namespace Core
 
             HideHand();
             _tutorialActive = false;
+
+            SetState(GameState.WaitingInput);
         }
 
         public void OnStackPlaced()
@@ -72,6 +75,12 @@ namespace Core
             _showRoutine = StartCoroutine(ShowAfterDelay());
         }
 
+        private void SetState(GameState newState)
+        {
+            if (gameController != null)
+                gameController.state = newState;
+        }
+
         private Vector2 WorldToCanvasPosition(Vector3 worldPos)
         {
             var screenPos = _cam.WorldToScreenPoint(worldPos);
@@ -88,7 +97,6 @@ namespace Core
             if (_targetStack == null || hand == null || canvas == null)
                 return;
 
-            
             hand.gameObject.SetActive(true);
 
             var stackScreenPos = WorldToCanvasPosition(_targetStack.transform.position);
@@ -101,6 +109,8 @@ namespace Core
 
             _handSequence.Append(hand.DOAnchorPos(targetPos, handBobDuration).SetEase(Ease.InOutSine));
             _handSequence.SetLoops(-1, LoopType.Yoyo);
+
+            SetState(GameState.Tutorial);
         }
 
         private void HideHand()

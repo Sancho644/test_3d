@@ -20,11 +20,9 @@ namespace Core
         [SerializeField] private TutorialSystem tutorialSystem;
 
         [Header("State")] 
-        [SerializeField] private GameState state;
+        [SerializeField] public GameState state;
 
-        private int _remainingStacks;
-
-        public bool CanAcceptInput => state == GameState.WaitingInput;
+        public bool CanAcceptInput => state == GameState.WaitingInput || state == GameState.Tutorial;
 
         private void Start()
         {
@@ -35,8 +33,7 @@ namespace Core
         {
             state = GameState.WaitingInput;
 
-            _remainingStacks = stackSpawner.SpawnInitialStacks();
-
+            stackSpawner.SpawnInitialStacks();
             chainSystem.ResetSpeed();
 
             if (tutorialSystem != null && !tutorialSystem.IsTutorialFinished)
@@ -66,8 +63,6 @@ namespace Core
 
             board.PlaceStack(target, drag.Stack);
             drag.Stack.SetPlaced(true);
-
-            _remainingStacks--;
 
             if (tutorialSystem != null)
                 tutorialSystem.OnStackPlaced();
