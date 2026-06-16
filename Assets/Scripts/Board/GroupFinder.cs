@@ -31,6 +31,9 @@ namespace Board
 
                 if (cell.CurrentStacks[^1].Data.Color != color)
                     continue;
+                
+                if (cell.CurrentStacks[^1].Data.Count == 0)
+                    continue;
 
                 result.Add(cell);
 

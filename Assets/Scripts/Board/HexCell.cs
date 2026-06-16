@@ -15,9 +15,8 @@ namespace Board
         
         [Header("Start Stack")] 
         [SerializeField] private bool spawnOnStart;
-        [SerializeField] private ColorType colorType;
-        [SerializeField] [Range(0, 9)] private int count = 1;
         [SerializeField] private StackView stackPrefab;
+        [SerializeField] private List<StackSpawnSettings> stackSpawnSettings;
         
         public bool IsEmpty => CurrentStacks.Count == 0;
         public float CellHeight => cellHeight;
@@ -54,22 +53,31 @@ namespace Board
                 transform.position.y + cellHeight, 
                 transform.position.z);
             
-            StackView stack = Instantiate(
-                stackPrefab,
-                stackPosition,
-                Quaternion.identity,
-                transform);
-
-            stack.Initialize(new StackData
+            foreach (var spawnSetting in stackSpawnSettings)
             {
-                Color = colorType,
-                Count = count
-            }, _gameController, _colorDatabase);
-            
-            stack.SpawnHex();
-            stack.SetCanDrag(false);
+                if (CurrentStacks.Count != 0)
+                {
+                    var lastHexPosition = CurrentStacks[^1].HexList[^1].gameObject.transform.position;
+                    stackPosition = new Vector3(lastHexPosition.x, lastHexPosition.y + CurrentStacks[^1].HexList[^1].Height, lastHexPosition.z);
+                }
+                
+                StackView stack = Instantiate(
+                    stackPrefab,
+                    stackPosition,
+                    Quaternion.identity,
+                    transform);
 
-            CurrentStacks.Add(stack);
+                stack.Initialize(new StackData
+                {
+                    Color = spawnSetting.ColorType,
+                    Count = spawnSetting.Count
+                }, _gameController, _colorDatabase);
+            
+                stack.SpawnHex();
+                stack.SetCanDrag(false);
+
+                CurrentStacks.Add(stack);
+            }
         }
     }
 }
