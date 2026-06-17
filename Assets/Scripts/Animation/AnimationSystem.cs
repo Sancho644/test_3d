@@ -1,6 +1,7 @@
 using System.Collections;
 using System;
 using Config;
+using Core;
 using DG.Tweening;
 using Merge;
 using UnityEngine;
@@ -44,7 +45,7 @@ namespace Animation
 
             var mergeCount = Math.Min(toMerge, placedView.HexList.Count);
             var startIndex = placedView.HexList.Count - 1;
-            var halfDuration = baseDuration / speedMultiplier / 2f;
+            var halfDuration = baseDuration / speedMultiplier;
 
             var masterSeq = DOTween.Sequence();
 
@@ -68,6 +69,9 @@ namespace Animation
                 hexSeq.Append(hex.transform.DOMove(peakPos, halfDuration).SetEase(Ease.OutQuad));
                 hexSeq.Append(hex.transform.DOMove(targetPos, halfDuration).SetEase(Ease.InQuad));
                 hexSeq.Insert(0, hex.transform.DORotateQuaternion(targetRotation, totalDuration).SetEase(Ease.Linear));
+
+                if (SoundSystem.Instance != null)
+                    hexSeq.OnComplete(() => SoundSystem.Instance.PlayMerge());
 
                 masterSeq.Insert(i * staggerDelay, hexSeq);
             }

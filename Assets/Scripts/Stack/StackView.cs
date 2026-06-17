@@ -33,7 +33,7 @@ namespace Stack
             dragDropSystem.Initialize(gameController, tutorialSystem);
         }
 
-        public Tween CreateDestroySequence(float perHexDuration, Action onComplete = null)
+        public Tween CreateDestroySequence(float perHexDuration, SoundSystem soundSystem = null, Action onComplete = null)
         {
             var seq = DOTween.Sequence();
 
@@ -42,10 +42,18 @@ namespace Stack
                 if (HexList[i] != null)
                 {
                     var index = HexList.Count - 1 - i;
+
                     seq.Insert(index * staggerDelay,
                         HexList[i].transform
                             .DOScale(new Vector3(0f, 1f, 0f), perHexDuration)
                             .SetEase(Ease.InBack));
+
+                    if (soundSystem != null)
+                    {
+                        var delay = index * staggerDelay + perHexDuration;
+                        var sound = soundSystem;
+                        DOVirtual.DelayedCall(delay, () => sound.PlayDestroy(), false);
+                    }
                 }
             }
 

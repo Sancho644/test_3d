@@ -4,6 +4,7 @@ using System.Linq;
 using Animation;
 using Board;
 using Config;
+using Core;
 using DG.Tweening;
 using Stack;
 using UnityEngine;
@@ -88,7 +89,7 @@ namespace Merge
                         foreach (var item in toDestroy)
                         {
                             var destroyDuration = gameConfig.PerHexDestroyDuration / _speedMultiplier;
-                            var destroySeq = item.data.View.CreateDestroySequence(destroyDuration);
+                            var destroySeq = item.data.View.CreateDestroySequence(destroyDuration, SoundSystem.Instance);
                             masterSeq.Join(destroySeq);
                         }
 
