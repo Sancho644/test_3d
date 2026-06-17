@@ -11,6 +11,7 @@ namespace Animation
     {
         [SerializeField] private float baseDuration = 0.5f;
         [SerializeField] private float peakHeight = 2f;
+        [SerializeField] private float staggerDelay = 0.05f;
         [SerializeField] private GameConfig gameConfig;
 
         public IEnumerator PlayMerge(MergeResult result, float speedMultiplier)
@@ -43,6 +44,9 @@ namespace Animation
 
             var mergeCount = Math.Min(toMerge, placedView.HexList.Count);
             var startIndex = placedView.HexList.Count - 1;
+            var halfDuration = baseDuration / speedMultiplier / 2f;
+
+            var masterSeq = DOTween.Sequence();
 
             for (int i = 0; i < mergeCount; i++)
             {
@@ -54,15 +58,21 @@ namespace Animation
                 var targetPos = baseTargetPos + Vector3.up * (hexHeight * i);
                 var peakPos = Vector3.Lerp(startPos, targetPos, 0.5f) + Vector3.up * peakHeight;
 
-                var halfDuration = baseDuration / speedMultiplier / 2f;
+                var direction = (targetPos - startPos).normalized;
+                var flipAxis = Vector3.Cross(Vector3.up, direction).normalized;
+                var targetRotation = Quaternion.AngleAxis(-180f, flipAxis);
 
-                var seq = DOTween.Sequence();
-                seq.Append(hex.transform.DOMove(peakPos, halfDuration).SetEase(Ease.OutQuad));
-                seq.Join(hex.transform.DORotate(new Vector3(0f, 0f, 180f), halfDuration * 2f).SetEase(Ease.InOutQuad));
-                seq.Append(hex.transform.DOMove(targetPos, halfDuration).SetEase(Ease.InQuad));
+                var totalDuration = halfDuration * 2f;
 
-                yield return seq.WaitForCompletion();
+                var hexSeq = DOTween.Sequence();
+                hexSeq.Append(hex.transform.DOMove(peakPos, halfDuration).SetEase(Ease.OutQuad));
+                hexSeq.Append(hex.transform.DOMove(targetPos, halfDuration).SetEase(Ease.InQuad));
+                hexSeq.Insert(0, hex.transform.DORotateQuaternion(targetRotation, totalDuration).SetEase(Ease.Linear));
+
+                masterSeq.Insert(i * staggerDelay, hexSeq);
             }
+
+            yield return masterSeq.WaitForCompletion();
         }
     }
 }

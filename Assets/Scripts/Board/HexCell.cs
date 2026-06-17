@@ -72,7 +72,7 @@ namespace Board
                     Quaternion.identity,
                     transform);
 
-                stack.Initialize(new System.Collections.Generic.List<StackData> { data }, _gameController, _colorDatabase);
+                stack.Initialize(new List<StackData> { data }, _gameController, _colorDatabase);
                 stack.SpawnHex();
                 stack.SetCanDrag(false);
 

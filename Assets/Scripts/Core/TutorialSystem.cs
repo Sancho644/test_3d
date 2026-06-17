@@ -83,6 +83,9 @@ namespace Core
 
         private Vector2 WorldToCanvasPosition(Vector3 worldPos)
         {
+            if (_cam == null)
+                _cam = Camera.main;
+
             var screenPos = _cam.WorldToScreenPoint(worldPos);
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 canvas.transform as RectTransform,
